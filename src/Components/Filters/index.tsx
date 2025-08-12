@@ -1,5 +1,5 @@
 
-type FiltersProps = {
+interface  FiltersProps {
   category: string;
   setCategory: (c: string) => void;
   priceRange: [number, number];
@@ -10,7 +10,7 @@ type FiltersProps = {
   disabled?: boolean;
 };
 
-export default function Filters({
+const Filters: React.FC<FiltersProps> = ({
   category,
   setCategory,
   priceRange,
@@ -19,7 +19,7 @@ export default function Filters({
   bounds,
   clearFilters,
   disabled = false,
-}: FiltersProps) {
+}: FiltersProps) =>  {
   return (
     <div className="bg-white p-4 rounded-lg shadow-sm">
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -80,3 +80,5 @@ export default function Filters({
     </div>
   );
 }
+
+export default Filters

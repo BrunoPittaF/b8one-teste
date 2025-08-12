@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useMemo, useState } from "react";
-import { Filters, Pagination, Showcase } from "../Components";
+import { Banner, Filters, Pagination, Showcase } from "../Components";
 import bannerDesktop from "../assets/images/acer-desktop.avif";
 import bannerMobile from "../assets/images/acer-mobile.avif";
 import { fetchProducts, fetchCategories } from "../services/fakestore";
@@ -61,14 +61,7 @@ export default function Ofertas() {
 
   return (
     <main className="w-full flex flex-col items-center justify-center min-h-screen bg-gray-50 pb-4">
-      <section className="w-full mb-8 overflow-hidden bg-gradient-to-r">
-        <div className="mx-auto flex items-center justify-center">
-          <picture>
-            <source media="(max-width: 768px)" srcSet={bannerMobile} />
-            <img src={bannerDesktop} alt="banner" />
-          </picture>
-        </div>
-      </section>
+      <Banner imageDesktop={bannerDesktop} imageMobile={bannerMobile} />
 
         <div className="mb-6">
           <Filters
