@@ -1,5 +1,4 @@
-
-interface  FiltersProps {
+interface FiltersProps {
   category: string;
   setCategory: (c: string) => void;
   priceRange: [number, number];
@@ -8,7 +7,7 @@ interface  FiltersProps {
   bounds: { min: number; max: number };
   clearFilters: () => void;
   disabled?: boolean;
-};
+}
 
 const Filters: React.FC<FiltersProps> = ({
   category,
@@ -19,12 +18,14 @@ const Filters: React.FC<FiltersProps> = ({
   bounds,
   clearFilters,
   disabled = false,
-}: FiltersProps) =>  {
+}: FiltersProps) => {
   return (
     <div className="bg-white p-4 rounded-lg shadow-s mb-8">
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div>
-          <label className="block text-xs font-medium text-gray-600 mb-1">Categoria</label>
+          <label className="block text-xs font-medium text-gray-600 mb-1">
+            Categoria
+          </label>
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
@@ -41,29 +42,45 @@ const Filters: React.FC<FiltersProps> = ({
         </div>
 
         <div>
-          <label className="block text-xs font-medium text-gray-600 mb-1">Faixa de preço (R$)</label>
+          <label className="block text-xs font-medium text-gray-600 mb-1">
+            Faixa de preço (R$)
+          </label>
           <div className="flex items-center gap-2">
             <input
-              type="number"
+              type="text"
               min={bounds.min}
               max={bounds.max}
-              value={priceRange[0]}
-              onChange={(e) => setPriceRange([Number(e.target.value || bounds.min), priceRange[1]])}
+              inputMode="numeric"
+              pattern="[0-9]*"
+              value={priceRange[0] ?? ""}
+              onChange={(e) => {
+                const val = e.target.value;
+                if (/^\d*$/.test(val)) {
+                  setPriceRange([val === "" ? 0 : Number(val), priceRange[1]]);
+                }
+              }}
               className="w-1/2 rounded-md border px-2 py-2 text-sm"
               disabled={disabled}
             />
             <span className="text-sm text-gray-500">—</span>
             <input
-              type="number"
+              type="text"
               min={bounds.min}
               max={bounds.max}
               value={priceRange[1]}
-              onChange={(e) => setPriceRange([priceRange[0], Number(e.target.value || bounds.max)])}
+              inputMode="numeric"
+              pattern="[0-9]*"
+              onChange={(e) => {
+                const val = e.target.value;
+                if (/^\d*$/.test(val)) {
+                  setPriceRange([priceRange[0], val === "" ? 0 : Number(val)]);
+                }
+              }}
               className="w-1/2 rounded-md border px-2 py-2 text-sm"
               disabled={disabled}
             />
           </div>
-          <div className="mt-2 text-xs text-gray-500">Min: {bounds.min} — Max: {bounds.max}</div>
+          {/* <div className="mt-2 text-xs text-gray-500">Min: {bounds.min} — Max: {bounds.max}</div> */}
         </div>
       </div>
 
@@ -75,10 +92,12 @@ const Filters: React.FC<FiltersProps> = ({
         >
           Limpar filtros
         </button>
-        <div className="text-xs text-gray-500">Os filtros são aplicados automaticamente.</div>
+        <div className="text-xs text-gray-500">
+          Os filtros são aplicados automaticamente.
+        </div>
       </div>
     </div>
   );
-}
+};
 
-export default Filters
+export default Filters;
