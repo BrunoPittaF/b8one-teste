@@ -17,7 +17,7 @@ const Showcase: React.FC<IShowcaseProps> = ({
   return (
     <>
       <h2 className="text-2xl font-bold">Ofertas da Semana</h2>
-      <div className="text-sm text-gray-600">
+      <div className="text-sm text-gray-600 mb-4">
         Mostrando  
          {products.length
           ? `${start + 1}-${Math.min(

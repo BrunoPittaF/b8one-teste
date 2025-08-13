@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useMemo, useState } from "react";
 import { Banner, Filters, Pagination, Showcase } from "../Components";
-import bannerDesktop from "../assets/images/acer-desktop.avif";
-import bannerMobile from "../assets/images/acer-mobile.avif";
+import bannerDesktop from "../assets/images/banner-desktop.webp";
+import bannerMobile from "../assets/images/banner-mobile.webp";
 import { fetchProducts, fetchCategories } from "../services/fakestore";
 
 const PER_PAGE = 6;
@@ -63,20 +63,7 @@ export default function Ofertas() {
     <main className="w-full flex flex-col items-center justify-center min-h-screen bg-gray-50 pb-4">
       <Banner imageDesktop={bannerDesktop} imageMobile={bannerMobile} />
 
-        <div className="mb-6">
-          <Filters
-            category={category}
-            setCategory={setCategory}
-            priceRange={priceRange}
-            setPriceRange={setPriceRange}
-            categories={categories}
-            bounds={priceBounds}
-            clearFilters={clearFilters}
-            disabled={isLoading}
-          />
-        </div>
-
-      <section className="max-w-7xl mx-auto">
+      <section className="max-w-[1920px] mx-auto">
         {isLoading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {Array.from({ length: PER_PAGE }).map((_, i) => (
@@ -92,6 +79,17 @@ export default function Ofertas() {
           </div>
         ) : (
           <div>
+          <Filters
+            category={category}
+            setCategory={setCategory}
+            priceRange={priceRange}
+            setPriceRange={setPriceRange}
+            categories={categories}
+            bounds={priceBounds}
+            clearFilters={clearFilters}
+            disabled={isLoading}
+          />
+            <div>
             <Showcase
               productsPerPage={PER_PAGE}
               products={filtered}
@@ -99,6 +97,8 @@ export default function Ofertas() {
               visibleProducts={visible}
             />
             <Pagination page={page} pages={pages} setPage={setPage} />
+            </div>
+
           </div>
         )}
       </section>

@@ -21,7 +21,7 @@ const Filters: React.FC<FiltersProps> = ({
   disabled = false,
 }: FiltersProps) =>  {
   return (
-    <div className="bg-white p-4 rounded-lg shadow-sm">
+    <div className="bg-white p-4 rounded-lg shadow-s mb-8">
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div>
           <label className="block text-xs font-medium text-gray-600 mb-1">Categoria</label>
@@ -70,7 +70,7 @@ const Filters: React.FC<FiltersProps> = ({
       <div className="mt-4 flex items-center gap-3">
         <button
           onClick={clearFilters}
-          className="bg-gray-100 px-3 py-2 rounded-md text-sm shadow-sm"
+          className="bg-gray-100 px-3 py-2 rounded-md text-sm shadow-sm hover:brightness-90"
           disabled={disabled}
         >
           Limpar filtros
